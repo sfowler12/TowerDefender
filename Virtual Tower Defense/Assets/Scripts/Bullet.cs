@@ -13,11 +13,12 @@ public class Bullet : MonoBehaviour
     }
 
     void Update(){
-        if (target == null) {
+        if (target == null) { // Error Handling
             Destroy(gameObject);
             return;
         }
 
+        //Bullet Movement
         Vector3 dir = target.position - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
 
@@ -29,7 +30,7 @@ public class Bullet : MonoBehaviour
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
     }
 
-    void HitTarget() {
+    void HitTarget() {// On Collision
         GameObject effectIn = (GameObject)Instantiate(ImpactEffect, transform.position, transform.rotation);
         Destroy(effectIn, 2f);
         Destroy(gameObject);

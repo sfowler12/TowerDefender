@@ -68,7 +68,7 @@ public class Turret : MonoBehaviour{
         fireCountDown -= Time.deltaTime;
     }
 
-    void Shoot() {
+    void Shoot() { // Creates Bullet
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
         Bullet bullet = bulletGO.GetComponent<Bullet>();
         if (bullet != null) {
