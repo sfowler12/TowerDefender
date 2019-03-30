@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Turret : MonoBehaviour
 {
@@ -10,10 +11,11 @@ public class Turret : MonoBehaviour
 
     [Header("Attributes")]
     public float range = 12f; // Area of Range.
-
     public float fireRate = 1f;
     private float fireCountDown = 0f;
+    public float power;
 
+    public Vector3 offSet;
     [Header("Setup Fields")]
     public string enemyTag = "Enemy";
     public Transform partToRotate;
@@ -22,9 +24,11 @@ public class Turret : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
 
+    public RangeCircle rangeCircle;
 
     void Start()    // Start is called before the first frame update
     {
+        rangeCircle.gameObject.SetActive(false);
         InvokeRepeating("UpdateTarget", 0f, 0.5f); // Checks for Target every .5 secs instead of every frame.
     }
 
@@ -100,12 +104,12 @@ public class Turret : MonoBehaviour
         Debug.Log("Over Turret");
         if (EventSystem.current.IsPointerOverGameObject())
             return;
-
+        rangeCircle.gameObject.SetActive(true);
     }
 
     void OnMouseExit()
     {
-   
+        rangeCircle.gameObject.SetActive(false);
     }
 
 }

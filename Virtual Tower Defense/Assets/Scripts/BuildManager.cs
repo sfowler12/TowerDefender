@@ -9,7 +9,8 @@ public class BuildManager : MonoBehaviour
     public static BuildManager instance;
     public GameObject turretToBuild;
     public GameObject stdTurretPrefab; // Might want to make an array of turrets later.
-    
+    public GameObject mslTurretPrefab;
+
     //Singleton
     private void Awake()
     {
