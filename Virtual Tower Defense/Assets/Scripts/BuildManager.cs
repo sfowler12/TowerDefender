@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
-    private GameObject turretToBuild;
+    public GameObject turretToBuild;
     public GameObject stdTurretPrefab; // Might want to make an array of turrets later.
-
+    
     //Singleton
     private void Awake()
     {
@@ -20,14 +22,14 @@ public class BuildManager : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
-    {
-        turretToBuild = stdTurretPrefab;
-    }
-
 
     public GameObject GetTurretToBuild()
     {
         return turretToBuild;
+    }
+
+    public void SetTurretToBuild(GameObject turret)
+    {
+        turretToBuild = turret;
     }
 }
