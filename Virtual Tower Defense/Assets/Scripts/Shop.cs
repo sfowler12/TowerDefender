@@ -19,11 +19,16 @@ public class Shop : MonoBehaviour
     public TurretBlueprint[] turretBlueprints;
     //-1 = NULL | 0 = stdTurret | 1 = mslTurret | 
 
-    private void Start()
+     void Start()
     {
         ClearInfo(); // Gets rid of placeholder info
 
         bm = BuildManager.instance;
+    }
+    private void Update()
+    {
+       playerMoney.text = "Funds: $" + PlayerStats.Money.ToString();
+
     }
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Make function for each type of turret 

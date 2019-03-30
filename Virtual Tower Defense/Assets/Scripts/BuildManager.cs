@@ -8,10 +8,8 @@ public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
     public TurretBlueprint turretToBuild;
-    //public GameObject stdTurretPrefab; // Might want to make an array of turrets later.
-    //public GameObject mslTurretPrefab;
     public Shop shop;
-
+    public bool CanBuild;
     //Singleton
     private void Awake()
     {
@@ -22,15 +20,15 @@ public class BuildManager : MonoBehaviour
         }
 
         instance = this;
-    }
 
-    public bool CanBuild { get { return turretToBuild != null; }}
+    }
 
     public bool HasMoney { get { return PlayerStats.Money >= turretToBuild.price; } }
 
     public void SelectTurretToBuild(TurretBlueprint turretBlue)
     {
         turretToBuild = turretBlue;
+        CanBuild = true;
     }
 
     public void BuildTurretOn(Node node) {
@@ -40,11 +38,11 @@ public class BuildManager : MonoBehaviour
         }
 
         PlayerStats.Money -= turretToBuild.price;
-        shop.playerMoney.text = "Funds: $" +PlayerStats.Money;
-
+        Debug.Log("Turret build. Money = $" + PlayerStats.Money.ToString());
         GameObject turret = (GameObject)Instantiate(turretToBuild.prefab, node.transform.position + turretToBuild.offSet, Quaternion.identity);
         node.turret = turret;
 
+        CanBuild = false;
         turretToBuild = null;
         shop.turretPurchased = false;
         shop.ClearInfo();
