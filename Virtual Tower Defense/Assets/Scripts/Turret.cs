@@ -15,7 +15,7 @@ public class Turret : MonoBehaviour
     private float fireCountDown = 0f;
     public float power;
 
-    public Vector3 offSet;
+ 
     [Header("Setup Fields")]
     public string enemyTag = "Enemy";
     public Transform partToRotate;

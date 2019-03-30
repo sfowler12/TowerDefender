@@ -6,11 +6,12 @@ using UnityEngine.EventSystems;
 public class Node : MonoBehaviour
 {
     BuildManager bm;
-    private GameObject turret;
+    public GameObject turret;
     private Renderer rend;
     private Color startColor;
 
     public Color hoverColor;
+    public Color notEnoughMoneyColor;
     public Vector3 positionOffset;
 
     private void Start()
@@ -20,39 +21,32 @@ public class Node : MonoBehaviour
         startColor = rend.material.color;
     }
 
+
     void OnMouseDown()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
-
-        if (bm.GetTurretToBuild() == null) {
-            return;
-        }
-
+        if (EventSystem.current.IsPointerOverGameObject()) {return;}
+        if (!bm.CanBuild) {return;}
+            
         if (turret != null) { 
             Debug.Log("Can't build there!"); // DISPLAY ON SCREEN LATER...
             return;
         }
 
-        //Build Turret ... UPDATE LATER...
-        GameObject turretToBuild = bm.GetTurretToBuild();
-        positionOffset = turretToBuild.GetComponent<Turret>().offSet;
-        turret = (GameObject) Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
-        bm.turretToBuild = null;
+        bm.BuildTurretOn(this);
     }
 
     // Hover Effect
     void OnMouseEnter()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
+        if (EventSystem.current.IsPointerOverGameObject()) {return;}
+        if (!bm.CanBuild) { return; }
 
-        if (bm.GetTurretToBuild() == null)
+        if (bm.HasMoney)
         {
-            return;
+            rend.material.color = hoverColor;
+        }else {
+            rend.material.color = notEnoughMoneyColor;
         }
-
-        rend.material.color = hoverColor;
     }
 
     void OnMouseExit()

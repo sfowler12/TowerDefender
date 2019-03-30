@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 644812042843278443}
   m_Layer: 0
   m_Name: mslTurret
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   enemyTag: Enemy
   partToRotate: {fileID: 2497588463625741268}
   turnSpeed: 10
-  bulletPrefab: {fileID: 182262664065016921, guid: b47bf1c88cb636c40ace93e8e29a0710,
+  bulletPrefab: {fileID: 5247525736530738910, guid: fe44fe71b7011214ca03111f391fa97b,
     type: 3}
   firePoint: {fileID: 4190870208204156385}
   rangeCircle: {fileID: 8645157677893506816}

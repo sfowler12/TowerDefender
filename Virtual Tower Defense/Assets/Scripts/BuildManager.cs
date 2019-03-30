@@ -7,9 +7,10 @@ using TMPro;
 public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
-    public GameObject turretToBuild;
-    public GameObject stdTurretPrefab; // Might want to make an array of turrets later.
-    public GameObject mslTurretPrefab;
+    public TurretBlueprint turretToBuild;
+    //public GameObject stdTurretPrefab; // Might want to make an array of turrets later.
+    //public GameObject mslTurretPrefab;
+    public Shop shop;
 
     //Singleton
     private void Awake()
@@ -23,14 +24,29 @@ public class BuildManager : MonoBehaviour
         instance = this;
     }
 
+    public bool CanBuild { get { return turretToBuild != null; }}
 
-    public GameObject GetTurretToBuild()
+    public bool HasMoney { get { return PlayerStats.Money >= turretToBuild.price; } }
+
+    public void SelectTurretToBuild(TurretBlueprint turretBlue)
     {
-        return turretToBuild;
+        turretToBuild = turretBlue;
     }
 
-    public void SetTurretToBuild(GameObject turret)
-    {
-        turretToBuild = turret;
+    public void BuildTurretOn(Node node) {
+        if (PlayerStats.Money < turretToBuild.price) {
+            Debug.Log("Not enough money.");
+            return;
+        }
+
+        PlayerStats.Money -= turretToBuild.price;
+        shop.playerMoney.text = "Funds: $" +PlayerStats.Money;
+
+        GameObject turret = (GameObject)Instantiate(turretToBuild.prefab, node.transform.position + turretToBuild.offSet, Quaternion.identity);
+        node.turret = turret;
+
+        turretToBuild = null;
+        shop.turretPurchased = false;
+        shop.ClearInfo();
     }
 }

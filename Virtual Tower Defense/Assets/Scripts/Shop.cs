@@ -7,45 +7,68 @@ using TMPro;
 public class Shop : MonoBehaviour
 {
     BuildManager bm;
-    public ItemInfo selectedItem;
+    public TextMeshProUGUI playerMoney;
+    public int highlightedTurNum;
+    public bool turretPurchased;
     public TextMeshProUGUI ItemName;
     public TextMeshProUGUI ItemInfo;
     public TextMeshProUGUI ItemPrice;
     public Image ItemImage;
+    
+
+    public TurretBlueprint[] turretBlueprints;
+    //-1 = NULL | 0 = stdTurret | 1 = mslTurret | 
 
     private void Start()
     {
-        ClearInfo();
+        ClearInfo(); // Gets rid of placeholder info
+
         bm = BuildManager.instance;
     }
-    public void PurchaseStandardTurret()
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Make function for each type of turret 
+    public void PurchaseStandardTurret() 
     {
-        bm.SetTurretToBuild(bm.stdTurretPrefab);
+        bm.SelectTurretToBuild(turretBlueprints[0]);
+        turretPurchased = true;
     }
 
-    public void PurchaseMissileTurret() // Make one for each type.
+    public void PurchaseMissileTurret() 
     {
-        bm.SetTurretToBuild(bm.mslTurretPrefab);
+        bm.SelectTurretToBuild(turretBlueprints[1]);
+        turretPurchased = true;
+    }
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    //Manages Shop Info 
+    public void UpdateInfo(int BlueprintNum) {
+        
+        if (!turretPurchased)
+        {
+            highlightedTurNum = BlueprintNum;
+            TurretBlueprint tur = turretBlueprints[highlightedTurNum];
+            ItemImage.gameObject.SetActive(true);
+            ItemName.text = tur.name;
+            ItemImage.sprite = turretBlueprints[highlightedTurNum].sprite;
+            ItemPrice.text = "$" + tur.price; //.ToString("0000");
+
+            ItemInfo.text = "Type: " + tur.type + "\t\tRange:" + tur.range
+                            + "\nPower:" + tur.power + "\t\tCooldown:" + tur.cooldown
+                            + "\nDescription:" + tur.description;
+        }
     }
 
-    public void GetSelectedItemInfo(ItemInfo ItemPassedIn) {
-        selectedItem = ItemPassedIn;
-        UpdateInfo();
-    }
-    public void UpdateInfo()
+    public void ClearInfo()
     {
-        ItemImage.gameObject.SetActive(true);
-        ItemName.text = selectedItem.ItemName;
-        ItemImage.sprite = selectedItem.ItemSprite;
-        ItemPrice.text = "$" + selectedItem.ItemPrice;
-        ItemInfo.text = "Range: " + selectedItem.range + "\nFire Rate:" + selectedItem.fireRate + "\nPower:" + selectedItem.power;
-    }
+        if (!turretPurchased)
+        {
+            ItemImage.gameObject.SetActive(false);
+            ItemName.text = "";
+            ItemImage.sprite = null;
+            ItemPrice.text = "";
+            ItemInfo.text = "";
+            highlightedTurNum = -1;
 
-    public void ClearInfo() {
-        ItemImage.gameObject.SetActive(false);
-        ItemName.text = "";
-        ItemImage.sprite = null;
-        ItemPrice.text = "";
-        ItemInfo.text = "";
+        }
     }
 }
