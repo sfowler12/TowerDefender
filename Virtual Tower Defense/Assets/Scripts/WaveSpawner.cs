@@ -10,7 +10,7 @@ public class WaveSpawner : MonoBehaviour
 
     public float timeBetweenWaves = 5.5f;
     private float countdown = 2f;
-
+    private int demoMaxWave = 20;
     private int waveIndex= 1;
 
     public TextMeshProUGUI waveCountdownText;
