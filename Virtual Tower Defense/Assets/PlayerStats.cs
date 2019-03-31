@@ -12,4 +12,9 @@ public class PlayerStats : MonoBehaviour
         Money = startMoney;  
     }
 
+    public void Add(int amount)
+    {
+        Money += amount;
+    }
+
 }

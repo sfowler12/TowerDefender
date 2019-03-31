@@ -25,7 +25,7 @@ public class Shop : MonoBehaviour
 
         bm = BuildManager.instance;
     }
-    private void Update()
+    public void Update()
     {
        playerMoney.text = "Funds: $" + PlayerStats.Money.ToString();
 

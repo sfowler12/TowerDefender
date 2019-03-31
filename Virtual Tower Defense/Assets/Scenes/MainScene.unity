@@ -5897,6 +5897,7 @@ GameObject:
   - component: {fileID: 534669905}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
+  - component: {fileID: 534669906}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5968,6 +5969,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 62.4, y: 0, z: 0}
+--- !u!114 &534669906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84b793e563d1f8a4fae51a9faf1712ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panSpeed: 30
+  panBorderThickness: 10
+  scrollSpeed: 5
+  minY: 10
+  maxY: 80
+  minX: -5
+  maxX: 80
+  minZ: -12
+  maxZ: 80
 --- !u!1001 &534831900
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14654,7 +14676,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2023663ed652b264a8446440ada3aa78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: PlaySong
+    clip: {fileID: 8300000, guid: 76c126a920b669b4182fb053893dda5d, type: 3}
+    volume: 0.858
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: MenuSong
+    clip: {fileID: 8300000, guid: c0aa821d291a3cf46b5b400c65e03d5e, type: 3}
+    volume: 0.311
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BulletSound
+    clip: {fileID: 8300000, guid: f3d0ef8dff1a39a4c8e87c94b22751d6, type: 3}
+    volume: 0.695
+    pitch: 1.91
+    loop: 0
+    source: {fileID: 0}
+  - name: ExplosionSound
+    clip: {fileID: 8300000, guid: 3a50b133d196fe14da00e45f11aed07d, type: 3}
+    volume: 0.743
+    pitch: 1.05
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &1369932822
 Transform:
   m_ObjectHideFlags: 0
@@ -22393,11 +22439,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 76c126a920b669b4182fb053893dda5d, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.341
+  m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

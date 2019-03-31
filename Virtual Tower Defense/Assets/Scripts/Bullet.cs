@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour
     public float speed = 70f;
     public float explosionRadius = 0;
     public GameObject ImpactEffect;
+    public PlayerStats ps;
+    public Shop shop;
 
     public void Seek(Transform _target) {
         target = _target;
@@ -36,10 +38,13 @@ public class Bullet : MonoBehaviour
     void HitTarget() {// On Collision
         GameObject effectIn = (GameObject)Instantiate(ImpactEffect, transform.position, transform.rotation);
         Destroy(effectIn, 2f);
+        FindObjectOfType<AudioManager>().Play("ExplosionSound");
+        PlayerStats.Money += 10;    //destroying an enemy gives $10
 
         if (explosionRadius > 0f) {
             Explode();
-        }else
+        }
+        else
         {
             Damage(target);
         }
