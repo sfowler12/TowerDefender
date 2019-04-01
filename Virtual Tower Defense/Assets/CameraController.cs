@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private bool doMovement = true;
     public float panSpeed = 40f;
     public float panBorderThickness = 10f;
 
@@ -16,16 +15,16 @@ public class CameraController : MonoBehaviour
     public float maxX = 80f;
 
     public float minZ = -12f;
-    public float maxZ = 70f;
+    public float maxZ = 30f;
 
     void Update()
     {
-        //stop panning when esc is pressed
-        if (Input.GetKeyDown(KeyCode.Escape))
-            doMovement = !doMovement;
 
-        if (!doMovement)
+        if (GameManager.GameIsOver)
+        {
+            this.enabled = false;
             return;
+        }
 
 
 

@@ -13,8 +13,8 @@ public class WaveSpawner : MonoBehaviour
     private int demoMaxWave = 20;
     private int waveIndex= 1;
 
-    public TextMeshProUGUI waveCountdownText;
-    public TextMeshProUGUI waveNumText;
+    public Text waveCountdownText;
+    public Text waveNumText;
     void Awake(){
         waveNumText.text = "Wave " + waveIndex;
     }
@@ -25,11 +25,13 @@ public class WaveSpawner : MonoBehaviour
         }
         countdown -= Time.deltaTime;
         countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
-        waveCountdownText.text = "Next Wave In: " + string.Format("{0:00.00}",countdown);
+        waveCountdownText.text = "Next Wave\n" + string.Format("{0:00.00}",countdown);
     }
 
     IEnumerator SpawnWave() {
-        waveNumText.text = "Wave " + waveIndex;
+        PlayerStats.Rounds++;
+
+        waveNumText.text = "Wave\n" + waveIndex;
         Debug.Log("Wave" + waveIndex + "Incoming!");
         // Spawns enemies based on the current wave number. ( ie. first wave = 1 enemy, second wave = 2 enemies etc...)
         // Could change this later... 

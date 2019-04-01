@@ -22,10 +22,16 @@ public class Enemy : MonoBehaviour
 
     void GetNextWaypoint() {// Find the next waypoint if any are left.
         if (waypointIndex >= waypoints.points.Length - 1) { // If at on last point...
-            Destroy(gameObject); 
+            EndPath();
             return;
         }
         waypointIndex++; 
         target = waypoints.points[waypointIndex];  // New target is the next waypoint in the array.
+    }
+
+    void EndPath()
+    {
+        PlayerStats.Lives--;
+        Destroy(gameObject);
     }
 }
